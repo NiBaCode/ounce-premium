@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ounce · Tu oro, desde 10 €</title>
+<meta name="description" content="Ounce es una app conceptual para comprar oro físico desde 10 €, a tu nombre y guardado en Zúrich. Apúntate a la lista de espera. Marca conceptual, cifras ilustrativas.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#cfc6b5">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23b98f2e'/%3E%3Ctext x='16' y='23' font-family='serif' font-size='20' text-anchor='middle' fill='%231d1a14'%3EO%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<script defer src="js/vendor/gsap.min.js"></script>
+<script defer src="js/vendor/ScrollTrigger.min.js"></script>
+<script defer src="js/vendor/lenis.min.js"></script>
+<script type="module" src="js/main.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<header class="head">
+  <a class="mark" href="#top" aria-label="Ounce, volver arriba" translate="no">Ounce</a>
+  <nav class="nav" aria-label="Principal">
+    <a href="#escala">La escala</a>
+    <a href="#app">La app</a>
+    <a href="#registro">El registro</a>
+  </nav>
+  <a class="head__cta" href="#lista">Apúntate</a>
+</header>
+
+<main id="main">
+  <!-- 1-2 · Una sola sequenza: dal cubetto da 10 € al lingotto da 1 kg, poi dentro l'oro -->
+  <section class="film" id="top" aria-labelledby="hero-title">
+    <div class="film__run" data-film-run>
+      <div class="film__stage">
+        <div class="seq" data-seq="a">
+          <picture>
+            <source media="(max-width: 699px)" srcset="img/poster-a-m.webp" width="900" height="1950">
+            <img class="seq__poster" src="img/poster-a.webp" width="1920" height="1200" alt="Un cubo de oro de 1,7 milímetros junto a una regla de acero, sobre piedra clara" fetchpriority="high">
+          </picture>
+        </div>
+        <div class="seq-load" data-seq-load aria-hidden="true"><i></i></div>
+
+        <div class="hero" data-hero>
+          <h1 id="hero-title" class="hero__title">Este es<br>tu oro.</h1>
+          <p class="hero__text">10&nbsp;€ compran unos 90&nbsp;mg: un cubo de 1,7&nbsp;mm. Pequeño, real y tuyo.</p>
+          <a class="btn btn--ink" href="#lista"><span>Apúntate a la lista</span><svg viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h17M13 1l5 5-5 5"/></svg></a>
+          <p class="hero__note">Lote&nbsp;01 · Sin compromiso</p>
+        </div>
+
+        <div class="scale" id="escala" data-scale>
+          <h2 class="scale__title">Empieza por<br>lo pequeño.</h2>
+          <ol class="scale__list">
+            <li class="scale__step"><span class="scale__eur">100&nbsp;€</span><span class="scale__g">unos 0,9&nbsp;g</span></li>
+            <li class="scale__step"><span class="scale__eur">1.000&nbsp;€</span><span class="scale__g">unos 9&nbsp;g</span></li>
+            <li class="scale__step"><span class="scale__eur">10.000&nbsp;€</span><span class="scale__g">unos 89&nbsp;g</span></li>
+            <li class="scale__step"><span class="scale__eur">112.000&nbsp;€</span><span class="scale__g">un lingote de 1&nbsp;kg</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · L'app: interfaccia vera, cambia con lo scroll -->
+  <section class="app" id="app" aria-labelledby="app-title">
+    <div class="app__run" data-app-run>
+      <div class="app__stage">
+        <!-- l'ultimo fotogramma del film (oro pieno) che si stringe fino a diventare lo schermo del telefono -->
+        <div class="app__gold" data-app-gold aria-hidden="true">
+          <picture>
+            <source media="(max-width: 699px), (max-aspect-ratio: 10/11)" srcset="img/seq/a-m/119.webp" width="720" height="1560">
+            <img src="img/seq/a-d/119.webp" width="1600" height="1000" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="app__copy" data-app-copy>
+          <h2 id="app-title" class="app__title">Tu oro cabe en<br>el bolsillo.</h2>
+          <ol class="app__steps">
+            <li class="app__step" data-step>
+              <h3>Compra</h3>
+              <p>Desde 10&nbsp;€, al precio del momento más un margen fijo del 0,9&nbsp;%.</p>
+            </li>
+            <li class="app__step" data-step>
+              <h3>Guarda</h3>
+              <p>Cada miligramo queda a tu nombre, asignado a un lingote concreto.</p>
+            </li>
+            <li class="app__step" data-step>
+              <h3>Vende</h3>
+              <p>Cuando quieras. El dinero vuelve a tu cuenta el mismo día hábil.</p>
+            </li>
+          </ol>
+        </div>
+
+        <div class="phone" aria-hidden="true">
+          <img class="phone__bezel" src="img/iphone-17-pro-silver.webp" width="685" height="1400" alt="" loading="lazy" decoding="async">
+          <div class="phone__screen">
+            <div class="ui" data-screen>
+              <p class="ui__top">Comprar oro</p>
+              <p class="ui__big">10,00&nbsp;€</p>
+              <p class="ui__sub">≈ <span data-count="88.5">88,5</span>&nbsp;mg</p>
+              <dl class="ui__rows">
+                <div><dt>Precio</dt><dd>112,00&nbsp;€/g</dd></div>
+                <div><dt>Margen</dt><dd>0,9&nbsp;%</dd></div>
+                <div><dt>Custodia</dt><dd>0,12&nbsp;% al año</dd></div>
+              </dl>
+              <span class="ui__btn">Comprar</span>
+            </div>
+            <div class="ui" data-screen>
+              <p class="ui__top">Tu oro</p>
+              <p class="ui__big">88,5&nbsp;mg</p>
+              <p class="ui__sub">9,82&nbsp;€ al precio de hoy</p>
+              <dl class="ui__rows">
+                <div><dt>Lingote</dt><dd>N.º&nbsp;000142</dd></div>
+                <div><dt>Ley</dt><dd>999,9</dd></div>
+                <div><dt>Cámara</dt><dd>Zúrich</dd></div>
+                <div><dt>Titular</dt><dd>A tu nombre</dd></div>
+              </dl>
+              <span class="ui__tag">Asignado</span>
+            </div>
+            <div class="ui" data-screen>
+              <p class="ui__top">Vender</p>
+              <p class="ui__big">9,82&nbsp;€</p>
+              <p class="ui__sub">por 88,5&nbsp;mg</p>
+              <dl class="ui__rows">
+                <div><dt>Precio</dt><dd>112,00&nbsp;€/g</dd></div>
+                <div><dt>Margen</dt><dd>0,9&nbsp;%</dd></div>
+                <div><dt>Llega</dt><dd>Hoy</dd></div>
+              </dl>
+              <span class="ui__btn">Vender</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Il registro: ogni riga è una prova -->
+  <section class="reg" id="registro" aria-labelledby="reg-title">
+    <div class="wrap reg__sheet">
+      <header class="reg__head">
+        <p class="label">Certificado de ensayo · N.º&nbsp;000142</p>
+        <h2 id="reg-title" class="reg__title">Todo por escrito.</h2>
+        <svg class="reg__seal" viewBox="0 0 160 160" aria-hidden="true">
+          <defs><path id="seal" d="M80 80m-58 0a58 58 0 1 1 116 0a58 58 0 1 1 -116 0"/></defs>
+          <circle cx="80" cy="80" r="76" /><circle cx="80" cy="80" r="44" />
+          <text><textPath href="#seal" textLength="356">OUNCE · ZÚRICH · ORO FINO · ENSAYADO ·</textPath></text>
+          <text class="reg__seal-n" x="80" y="89" text-anchor="middle">999,9</text>
+        </svg>
+      </header>
+      <dl class="reg__list">
+        <div><dt>Metal</dt><dd>Oro LBMA Good Delivery, 999,9</dd></div>
+        <div><dt>Custodia</dt><dd>Asignada y asegurada, Zúrich</dd></div>
+        <div><dt>Coste de custodia</dt><dd>0,12&nbsp;% al año</dd></div>
+        <div><dt>Margen</dt><dd>0,9&nbsp;% al comprar y al vender</dd></div>
+        <div><dt>Mínimo</dt><dd>10&nbsp;€, con precisión de 1&nbsp;mg</dd></div>
+        <div><dt>Entrega física</dt><dd>Desde 100&nbsp;g, asegurada</dd></div>
+        <div><dt>Auditoría</dt><dd>Dos veces al año, independiente</dd></div>
+      </dl>
+      <p class="reg__note">El precio del oro sube y baja. Compra solo lo que puedas mantener con calma.</p>
+    </div>
+  </section>
+
+  <!-- 5 · Il caveau: la camera arriva al lingotto, il modulo sta sulla scena -->
+  <section class="vault" id="lista" aria-labelledby="vault-title">
+    <div class="vault__run" data-vault-run>
+      <div class="vault__stage">
+        <div class="seq" data-seq="c">
+          <picture>
+            <source media="(max-width: 699px)" srcset="img/poster-c-m.webp" width="900" height="1950">
+            <img class="seq__poster" src="img/poster-c.webp" width="1920" height="1200" alt="Un lingote de oro sobre una base de piedra negra, delante de la puerta de una cámara acorazada" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="vault__copy" data-vault-copy>
+          <h2 id="vault-title" class="vault__title">Tu oro tiene<br>dirección.</h2>
+          <p class="vault__text">Avísame cuando abra la cámara. Un solo correo, sin nada que pagar hoy.</p>
+          <form class="form" data-form novalidate>
+            <label for="email">Tu correo electrónico</label>
+            <input id="email" name="email" type="email" inputmode="email" autocomplete="email" spellcheck="false" placeholder="nombre@correo.com…" required aria-describedby="form-msg">
+            <button class="btn btn--gold" type="submit"><span data-btn-label>Apúntate a la lista</span><svg viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h17M13 1l5 5-5 5"/></svg></button>
+            <p class="form__msg" id="form-msg" aria-live="polite">Te escribimos una vez, cuando la app esté lista.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <p class="foot__mark" translate="no">Ounce</p>
+    <p>Marca conceptual. Cifras ilustrativas.</p>
+  </div>
+</footer>
+</body>
+</html>

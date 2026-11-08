@@ -1,0 +1,212 @@
+/* Ounce premium — identità «Swiss Assay»: pietra chiara, acciaio, misure esatte; si finisce nel buio del caveau. */
+@font-face { font-family: "Newsreader"; src: url("fonts/newsreader.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Archivo"; src: url("fonts/archivo.woff2") format("woff2"); font-weight: 400 600; font-stretch: 85% 100%; font-style: normal; font-display: swap; }
+
+:root {
+  --cal: #cfc6b5;
+  --paper: #efe9dc;
+  --ink: #1d1a14;
+  --ink-soft: #4d463a;      /* AA su --cal e --paper */
+  --steel: #b8b6b0;
+  --gold: #b98f2e;
+  --gold-hi: #e9c46a;
+  --night: #0b0c0f;
+  --bone: #f1efe9;
+  --bone-soft: #bdbcb7;
+  --serif: "Newsreader", Georgia, serif;
+  --sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --gutter: max(clamp(20px, 4.4vw, 72px), env(safe-area-inset-left), env(safe-area-inset-right));
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { background: var(--cal); color-scheme: light; -webkit-text-size-adjust: 100%; }
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+body { background: var(--cal); color: var(--ink); font-family: var(--sans); font-size: 1rem; line-height: 1.5; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+a, button { -webkit-tap-highlight-color: rgba(29, 26, 20, .1); touch-action: manipulation; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 2px; }
+.skip { position: absolute; left: 12px; top: -60px; z-index: 50; padding: 12px 18px; background: var(--ink); color: var(--bone); text-decoration: none; }
+.skip:focus { top: 12px; }
+.wrap { width: 100%; max-width: 1240px; margin-inline: auto; padding-inline: var(--gutter); }
+.label { font-size: .8125rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+[id] { scroll-margin-top: 0; }
+h1, h2, h3 { text-wrap: balance; }
+
+/* ---------- testa ---------- */
+.head { position: absolute; z-index: 10; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: max(22px, env(safe-area-inset-top)) var(--gutter) 22px; }
+.mark { font-family: var(--serif); font-size: 1.5rem; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; padding: 8px 0; }
+.nav { display: flex; gap: 32px; }
+.nav a, .head__cta { font-size: .875rem; font-weight: 500; text-decoration: none; padding: 12px 0; }
+.nav a { color: var(--ink-soft); transition: color .3s var(--ease); }
+.head__cta { background: linear-gradient(currentColor, currentColor) 0 calc(100% - 8px) / 100% 1px no-repeat; transition: background-size .45s var(--ease); }
+@media (hover: hover) {
+  .nav a:hover { color: var(--ink); }
+  .head__cta:hover { background-size: 0 1px; background-position: 100% calc(100% - 8px); }
+}
+
+/* ---------- bottone: una sola azione ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 14px; min-height: 54px; padding: 0 28px; border: 0; border-radius: 999px; cursor: pointer; font: 500 1rem/1 var(--sans); text-decoration: none; transition: background-color .35s var(--ease), color .35s var(--ease); }
+.btn svg { width: 20px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.4; transition: transform .4s var(--ease); }
+.btn--ink { background: var(--ink); color: var(--bone); }
+.btn--gold { background: var(--gold-hi); color: var(--ink); }
+@media (hover: hover) {
+  .btn:hover svg { transform: translateX(5px); }
+  .btn--ink:hover { background: var(--gold); color: var(--ink); }
+  .btn--gold:hover { background: var(--bone); }
+}
+
+/* ---------- sequenze ---------- */
+.seq { position: absolute; inset: 0; }
+.seq picture, .seq__poster { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; }
+.seq__poster { object-fit: cover; }
+.seq__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity .3s linear; }
+.seq.is-live .seq__canvas { opacity: 1; }
+.seq-load { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; height: 2px; pointer-events: none; transition: opacity .5s linear; }
+.seq-load i { display: block; height: 100%; background: var(--ink); transform: scaleX(0); transform-origin: 0 50%; transition: transform .25s linear; }
+.seq-load.is-done { opacity: 0; }
+
+/* ---------- 1-2 · film ---------- */
+.film { position: relative; background: var(--cal); }
+.film__run { height: 760svh; }
+.film__stage { position: sticky; top: 0; height: 100svh; min-height: 560px; overflow: hidden; }
+.hero, .scale { position: absolute; z-index: 3; left: var(--gutter); bottom: max(clamp(32px, 6svh, 64px), env(safe-area-inset-bottom)); }
+.hero { width: min(560px, calc(100% - 2 * var(--gutter))); }
+.hero__title { font-family: var(--serif); font-weight: 400; font-size: clamp(4.25rem, 8.4vw, 8rem); line-height: .98; letter-spacing: -.02em; }
+.hero__text { max-width: 30ch; margin: 22px 0 26px; font-size: clamp(1.0625rem, 1.4vw, 1.3125rem); line-height: 1.4; color: var(--ink-soft); }
+.hero__note { margin-top: 16px; font-size: 1rem; color: var(--ink-soft); }
+.scale { width: min(620px, calc(100% - 2 * var(--gutter))); visibility: hidden; }
+/* desktop: i cubi stanno a metà altezza, il testo va nella pietra vuota in alto */
+@media (min-width: 700px) { .scale { bottom: auto; top: clamp(88px, 13svh, 140px); } }
+.scale__title { font-family: var(--serif); font-weight: 400; font-size: clamp(2.5rem, 4.4vw, 4.25rem); line-height: 1.02; letter-spacing: -.015em; }
+.scale__list { position: relative; list-style: none; padding: 0; margin-top: 24px; min-height: 7.4rem; }
+.scale__step { position: absolute; left: 0; top: 0; display: grid; gap: 2px; }
+.scale__eur { font-family: var(--sans); font-stretch: 85%; font-weight: 500; font-size: clamp(3rem, 5.6vw, 5.25rem); line-height: 1; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.scale__g { font-size: clamp(1.0625rem, 1.4vw, 1.3125rem); color: var(--ink-soft); }
+
+/* ---------- 3 · app ---------- */
+.app { position: relative; z-index: 3; }
+.app__stage { background: var(--paper); }
+/* con il movimento la sezione si appoggia sull'ultimo schermo del film: parte quando il film è sull'oro pieno */
+@media (prefers-reduced-motion: no-preference) { .js-gold .app { margin-top: -100svh; } .js-gold .app__stage { visibility: hidden; } .js-gold .app.is-on .app__stage { visibility: visible; } }
+.app__run { height: 320svh; }
+.app__stage { position: sticky; top: 0; height: 100svh; min-height: 620px; overflow: hidden; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 48px; padding: 0 clamp(var(--gutter), 9vw, 150px); }
+.app__title { font-family: var(--serif); font-weight: 400; font-size: clamp(2.5rem, 4.4vw, 4.25rem); line-height: 1.02; letter-spacing: -.015em; }
+.app__steps { position: relative; list-style: none; padding: 0; margin-top: 36px; min-height: 11rem; }
+.app__step { position: absolute; left: 0; top: 0; max-width: 34ch; }
+.app__step h3 { font-weight: 500; font-size: clamp(1.75rem, 2.4vw, 2.25rem); line-height: 1.1; }
+.app__step p { margin-top: 10px; font-size: clamp(1.0625rem, 1.4vw, 1.25rem); line-height: 1.45; color: var(--ink-soft); }
+/* lo schermo è d'oro: è l'ultimo fotogramma del film (.app__gold) che si è stretto fin qui. Senza JS resta l'oro piatto */
+.app__gold { position: absolute; inset: 0; z-index: 1; pointer-events: none; clip-path: inset(0 0 100% 0); }
+.app__gold picture, .app__gold img { width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.app__copy, .phone { position: relative; z-index: 2; }
+/* desktop: titolo a sinistra, telefono al centro (l'oro si stringe verso il centro), i passi a destra */
+@media (min-width: 700px) {
+  .app__stage { grid-template-columns: 1fr auto 1fr; gap: clamp(32px, 4vw, 72px); }
+  .app__copy { display: contents; }
+  .app__title { position: relative; z-index: 2; grid-column: 1; grid-row: 1; font-size: clamp(2.5rem, 3.7vw, 4rem); }
+  .phone { grid-column: 2; grid-row: 1; }
+  .app__steps { grid-column: 3; grid-row: 1; justify-self: end; width: min(100%, 30ch); margin-top: 0; }
+}
+/* cornice ufficiale Apple (iPhone 17 Pro Silver, 1350×2760): schermo a 72 px dai lati e 69 px da sopra e sotto, angoli ~200 px.
+   Lo schermo è un filo più grande del buco (resta sotto il bordo nero), così l'oro non lascia fessure */
+.phone { --h: min(76svh, 700px); --w: calc(var(--h) * 1350 / 2760); width: var(--w); height: var(--h); }
+.phone__bezel { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; max-width: none; pointer-events: none; filter: drop-shadow(0 28px 34px rgba(29, 26, 20, .26)); }
+.phone__screen { position: absolute; z-index: 1; left: calc(var(--w) * 68 / 1350); right: calc(var(--w) * 68 / 1350); top: calc(var(--h) * 65 / 2760); bottom: calc(var(--h) * 65 / 2760); border-radius: calc(var(--w) * 190 / 1350); overflow: hidden; background: #d8bf62; color: var(--ink); }
+.js-gold .phone__screen { background: transparent; }
+.ui { position: absolute; inset: 0; display: flex; flex-direction: column; padding: calc(var(--h) * .095) calc(var(--h) * .04) calc(var(--h) * .045); font-size: calc(var(--h) * .0215); }
+.ui + .ui { opacity: 0; }
+.ui__top { color: rgba(29, 26, 20, .72); }
+.ui__big { margin-top: 1.4em; font-stretch: 85%; font-size: 3.1em; font-weight: 500; line-height: 1; font-variant-numeric: tabular-nums; }
+.ui__sub { margin-top: .5em; font-weight: 500; font-variant-numeric: tabular-nums; }
+.ui__rows { margin-top: 2em; border-top: 1px solid rgba(29, 26, 20, .22); }
+.ui__rows div { display: flex; justify-content: space-between; gap: 1em; padding: .85em 0; border-bottom: 1px solid rgba(29, 26, 20, .22); }
+.ui__rows dt { color: rgba(29, 26, 20, .72); }
+.ui__rows dd { margin: 0; font-variant-numeric: tabular-nums; }
+.ui__btn { margin-top: auto; display: grid; place-items: center; height: 3em; border-radius: 99px; background: var(--ink); color: var(--bone); font-weight: 500; }
+.ui__tag { margin-top: auto; align-self: flex-start; padding: .4em .9em; border: 1px solid var(--ink); border-radius: 99px; color: var(--ink); }
+
+/* ---------- 4 · registro ---------- */
+.reg { position: relative; z-index: 3; background: var(--paper); padding-block: clamp(32px, 6svh, 72px) clamp(72px, 13svh, 140px); }
+.reg__head { position: relative; padding-right: 180px; }
+.reg__title { margin-top: 14px; font-family: var(--serif); font-weight: 400; font-size: clamp(2.5rem, 4.4vw, 4.25rem); line-height: 1.02; letter-spacing: -.015em; }
+.reg__seal { position: absolute; right: 0; top: -8px; width: 148px; height: 148px; color: var(--gold); transform: rotate(-12deg); }
+.reg__seal circle { fill: none; stroke: currentColor; stroke-width: 1.2; }
+.reg__seal text { fill: currentColor; font: 500 12.5px var(--sans); letter-spacing: .08em; }
+.reg__seal .reg__seal-n { font: 500 25px var(--sans); font-stretch: 85%; letter-spacing: 0; }
+.reg__list { margin-top: 48px; border-top: 1px solid var(--ink); }
+.reg__list div { display: grid; grid-template-columns: minmax(150px, 1fr) 2fr; gap: 8px 32px; padding: 17px 0; border-bottom: 1px solid var(--steel); }
+.reg__list dt { color: var(--ink-soft); }
+.reg__list dd { margin: 0; font-size: 1.125rem; font-variant-numeric: tabular-nums; }
+.reg__note { margin-top: 28px; max-width: 46ch; font-family: var(--serif); font-size: clamp(1.25rem, 1.9vw, 1.625rem); line-height: 1.3; }
+
+/* ---------- 5 · caveau ---------- */
+.vault { position: relative; z-index: 3; background: var(--night); color: var(--bone); }
+.vault__run { height: 300svh; }
+.vault__stage { position: sticky; top: 0; height: 100svh; min-height: 620px; overflow: hidden; }
+.vault__copy { position: absolute; z-index: 3; left: var(--gutter); bottom: max(clamp(32px, 7svh, 72px), env(safe-area-inset-bottom)); width: min(400px, calc(100% - 2 * var(--gutter))); text-shadow: 0 1px 24px rgba(0, 0, 0, .5); }
+.vault__title { font-family: var(--serif); font-weight: 400; font-size: clamp(2.5rem, 4.2vw, 4rem); line-height: 1.02; letter-spacing: -.015em; }
+.vault__text { margin-top: 14px; font-size: 1.0625rem; color: var(--bone-soft); }
+.form { display: grid; gap: 12px; margin-top: 22px; }
+.form label { font-size: .9375rem; color: var(--bone-soft); }
+.form input { width: 100%; min-height: 50px; padding: 0 0 2px; border: 0; border-bottom: 1px solid rgba(241, 239, 233, .6); border-radius: 0; background: transparent; color: var(--bone); font: 1.125rem var(--sans); touch-action: manipulation; }
+.form input::placeholder { color: rgba(241, 239, 233, .6); }
+.form input:focus-visible { outline: none; border-bottom: 2px solid var(--gold-hi); }
+.form input[aria-invalid="true"] { border-bottom-color: #ff9a8f; }
+.form__msg { min-height: 1.5em; font-size: 1rem; color: var(--bone-soft); }
+.form__msg.is-error { color: #ffb3aa; }
+.form__msg.is-ok { color: var(--bone); }
+.form .btn { width: 100%; }
+
+/* ---------- piede ---------- */
+.foot { position: relative; z-index: 3; background: var(--night); color: var(--bone-soft); padding: 28px 0 max(28px, env(safe-area-inset-bottom)); font-size: .875rem; }
+.foot__in { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 32px; }
+.foot__mark { font-family: var(--serif); font-size: 1.25rem; letter-spacing: .16em; text-transform: uppercase; color: var(--bone); }
+
+/* ---------- telefono ---------- */
+@media (max-width: 699px) {
+  .nav { display: none; }
+  .mark { font-size: 1.25rem; }
+  .hero__title { font-size: 4.25rem; }
+  .hero .btn { width: 100%; }
+  .scale__eur { font-size: 3.25rem; }
+  .app__stage { grid-template-columns: 1fr; grid-template-rows: auto auto; align-content: center; justify-items: center; gap: 22px; padding: 56px var(--gutter) 24px; }
+  .app__copy { order: 2; width: 100%; }
+  .app__title { display: none; }
+  .app__steps { margin-top: 0; min-height: 9rem; }
+  .phone { --h: min(58svh, 500px); order: 1; }
+  .reg__head { padding-right: 0; }
+  .reg__seal { position: static; display: block; width: 112px; height: 112px; margin-top: 20px; }
+  .reg__list div { grid-template-columns: 1fr; gap: 2px; }
+  .head__cta, .foot, .label { font-size: 1rem; }
+}
+
+/* ---------- movimento ridotto: tutto fermo e leggibile ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; }
+  .seq-load { display: none; }
+  .film__run { height: auto; }
+  /* il poster resta in alto con l'apertura sopra, la scala diventa un elenco fermo sotto */
+  .film__stage { position: relative; height: auto; display: grid; overflow: visible; }
+  .film__stage > .seq { position: relative; grid-area: 1 / 1; height: 100svh; min-height: 560px; }
+  .hero { position: relative; grid-area: 1 / 1; align-self: end; }
+  .scale { position: relative; grid-area: 2 / 1; left: 0; bottom: auto; top: auto; width: 100%; visibility: visible; padding: 56px var(--gutter) 72px; }
+  .scale__list { min-height: 0; display: grid; gap: 20px; }
+  .scale__step { position: static; }
+  .app__run, .vault__run { height: auto; }
+  .app__stage { position: relative; height: auto; padding-block: 64px; }
+  .app__steps { min-height: 0; display: grid; gap: 24px; }
+  .app__step { position: static; }
+  .vault__stage { position: relative; height: 100svh; }
+}
+
+/* caveau su telefono: il lingotto resta libero sopra il modulo */
+@media (max-width: 699px) {
+  .vault__title { font-size: 2.25rem; }
+  .vault__text { margin-top: 8px; font-size: 1rem; }
+  .form { gap: 8px; margin-top: 12px; }
+  .form label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
